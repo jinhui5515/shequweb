@@ -42,14 +42,7 @@ class System extends Base
 
         return view('menulist');
     }
-    public function mediaList()
-    {
-        $allMenu = Db::name('menu')->order('sort ASC')->select();
-//        $menuList = \Tree::makeTree($allMenu);
-        $this->assign('menuList', $allMenu);
 
-        return view('media-list');
-    }
     public function addMenu()
     {
         if (Request::isPost()) {
@@ -246,4 +239,25 @@ class System extends Base
         }
     }
 
+    public function mediaList()
+    {
+//        $allMenu = Db::name('menu')->order('sort ASC')->select();
+//        $menuList = \Tree::makeTree($allMenu);
+//        $this->assign('menuList', $menuList);
+
+        return view('media-list');
+    }
+    public function sq_index()
+    {
+//        $allMenu = Db::name('menu')->order('sort ASC')->select();
+//        $menuList = \Tree::makeTree($allMenu);
+//        $this->assign('menuList', $menuList);
+        return view('media-list');
+    }
+    public function tzgl()
+    {
+        $admin = Db::name('admin')->where('admin_id', 'eq', $this->admin_id)->select();
+        $this->assign('adminList', $admin);
+        return view('tzgl');
+    }
 }

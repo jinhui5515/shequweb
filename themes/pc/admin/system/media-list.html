@@ -30,10 +30,6 @@
 				<li class="mui-table-view-cell mui-media">
 					<a href="javascript:;">
 						<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
-
-
-
-
 						<div class="mui-media-body">
 							幸福
 							<p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
@@ -68,5 +64,17 @@
 		mui.init({
 			swipeBack:true //启用右滑关闭功能
 		});
+
+
+		// https://open.weixin.qq.com/connect/oauth2/authorize?appid=“你公众号的appid”&redirect_uri=“方法处理完获得的url”
+		// 		&response_type=code&scope=snsapi_userinfo&state=STATE     #wechat_redirect
+
+
+		// https://api.weixin.qq.com/sns/oauth2/access_token?appid=“公众号的appid”&secret=“公众号的secret”
+		// 		&code=“第一步获取的code”&grant_type=authorization_code
+
+
+		// https://api.weixin.qq.com/sns/userinfo?access_token=”第二步获取的access_token”&openid=“第二步获取的openid”
+		// 		&lang=zh_CN
 	</script>
 </html>

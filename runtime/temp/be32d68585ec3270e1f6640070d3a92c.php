@@ -1,4 +1,4 @@
-<?php /*a:1:{s:91:"C:\Users\Abby\Downloads\ye-star-rhaphp-master\rhaphp\themes/pc/admin/system\media-list.html";i:1604924260;}*/ ?>
+<?php /*a:1:{s:91:"C:\Users\Abby\Downloads\ye-star-rhaphp-master\rhaphp\themes/pc/admin/system\media-list.html";i:1604931766;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -24,7 +24,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">media list（图文列表）</h1>
+			<h1 class="mui-title">社区新闻</h1>
 		</header>
 		<div class="mui-content">
 			<ul class="mui-table-view">

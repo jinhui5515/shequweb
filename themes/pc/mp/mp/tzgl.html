@@ -1,0 +1,281 @@
+{extend name="../admin/common/base" /}
+{block name="body"}
+<div class="layui-row">
+    <form class="layui-form" action="">
+        <div class="layui-col-md5" style="margin-left: 5px; line-height: 38px;">
+            <div class="layui-form-item">
+                <input name="desc" placeholder="请输入关键词" value="{:input('desc')}" class="layui-input" type="text">
+            </div>
+        </div>
+        <div class="layui-col-md4" style="margin-left: 5px; line-height: 38px;">
+            <button class="layui-btn layui-btn-primary" lay-submit="" lay-filter="formDemo">搜索内容</button>
+        </div>
+    </form>
+</div>
+<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+    <ul class="layui-tab-title">
+        <li {eq name="type" value="tzgg"}class="layui-this"{/eq}><a href="{:url('mp/Mp/tzgl',['type'=>'tzgg'])}">通知公告</a></li>
+        <li {eq name="type" value="sqxw"}class="layui-this"{/eq}><a href="{:url('mp/Mp/tzgl',['type'=>'sqxw'])}">社区新闻</a></li>
+        <li {eq name="type" value="bszn"}class="layui-this"{/eq}><a href="{:url('mp/Mp/tzgl',['type'=>'bszn'])}">办事指南</a></li>
+        <li {eq name="type" value="dwgk"}class="layui-this"{/eq}><a href="{:url('mp/Mp/tzgl',['type'=>'dwgk'])}">党务公开</a></li>
+        <a style="margin: 0 10px;" onclick="addReply()" href="javascript:;" class="layui-btn layui-btn-normal layui-btn-sm rha-nav-title">增加通知</a>
+    </ul>
+    <div class="layui-tab-content">
+        {switch name="type"}
+        {case value="sqxw"}
+        <table class="layui-table" lay-skin="line">
+            <colgroup>
+                <col width="120">
+                <col >
+                <col width="100" >
+                <col width="150">
+            </colgroup>
+            <thead>
+            <tr>
+                <th>缩略图</th>
+                <th>导语</th>
+                <th>浏览人数</th>
+                <th>创建时间</th>
+                <th>当前状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="data" id="vo"}
+            <tr>
+                <td><img src="{$vo.img}"/></td>
+                <td>{$vo.desc}</td>
+                <td>{$vo.llrs}</td>
+                <td>{$vo.cjsj}</td>
+                <td>{if condition="$vo.status=='1'"}使用中{else/}已停用{/if}</td>
+                <td>
+                    <div class="">
+                        <a class="rha-bt-a" href="javascript:;" onclick="editReply('{$vo.id}')">修改</a>
+                        {if condition="$vo.status=='1'"}
+                        <a class="rha-bt-a" href="javascript:;" onclick="updateReply('{$vo.id}','0')">停用</a>
+                        {else/}
+                        <a class="rha-bt-a" href="javascript:;" onclick="updateReply('{$vo.id}','1')">开启</a>
+                        {/if}
+                        <a class="rha-bt-a" href="javascript:;" onclick="delReply('{$vo.id}')">删除</a>
+                    </div>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+        {$data->render()|raw}
+        {/case}
+        {case value="tzgg"}
+        <table class="layui-table" lay-skin="line">
+            <colgroup>
+                <col width="120">
+                <col >
+                <col width="100" >
+                <col width="150">
+            </colgroup>
+            <thead>
+            <tr>
+                <th>缩略图</th>
+                <th>导语</th>
+                <th>浏览人数</th>
+                <th>创建时间</th>
+                <th>当前状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="data" id="vo"}
+            <tr>
+                <td><img src="{$vo.img}"/></td>
+                <td>{$vo.desc}</td>
+                <td>{$vo.llrs}</td>
+                <td>{$vo.cjsj}</td>
+                <td>{if condition="$vo.status=='1'"}使用中{else/}已停用{/if}</td>
+                <td>
+                    <div class="">
+                        <a class="rha-bt-a" href="javascript:;" onclick="editReply('{$vo.id}')">修改</a>
+                        {if condition="$vo.status=='1'"}
+                        <a class="rha-bt-a" href="javascript:;" onclick="updateReply('{$vo.id}','0')">停用</a>
+                        {else/}
+                        <a class="rha-bt-a" href="javascript:;" onclick="updateReply('{$vo.id}','1')">开启</a>
+                        {/if}
+                        <a class="rha-bt-a" href="javascript:;" onclick="delReply('{$vo.id}')">删除</a>
+                    </div>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+        {$data->render()|raw}
+        {/case}
+        {case value="bszn"}
+        <table class="layui-table" lay-skin="line">
+            <colgroup>
+                <col width="120">
+                <col >
+                <col width="100" >
+                <col width="150">
+            </colgroup>
+            <thead>
+            <tr>
+                <th>缩略图</th>
+                <th>导语</th>
+                <th>浏览人数</th>
+                <th>创建时间</th>
+                <th>当前状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="data" id="vo"}
+            <tr>
+                <td><img src="{$vo.img}"/></td>
+                <td>{$vo.desc}</td>
+                <td>{$vo.llrs}</td>
+                <td>{$vo.cjsj}</td>
+                <td>{if condition="$vo.status=='1'"}使用中{else/}已停用{/if}</td>
+                <td>
+                    <div class="">
+                        <a class="rha-bt-a" href="javascript:;" onclick="editReply('{$vo.id}')">修改</a>
+                        {if condition="$vo.status=='1'"}
+                        <a class="rha-bt-a" href="javascript:;" onclick="updateReply('{$vo.id}','0')">停用</a>
+                        {else/}
+                        <a class="rha-bt-a" href="javascript:;" onclick="updateReply('{$vo.id}','1')">开启</a>
+                        {/if}
+                        <a class="rha-bt-a" href="javascript:;" onclick="delReply('{$vo.id}')">删除</a>
+                    </div>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+        {$data->render()|raw}
+        {/case}
+        {case value="dwgk"}
+        <table class="layui-table" lay-skin="line">
+            <colgroup>
+                <col width="120">
+                <col >
+                <col width="100" >
+                <col width="150">
+            </colgroup>
+            <thead>
+            <tr>
+                <th>缩略图</th>
+                <th>导语</th>
+                <th>浏览人数</th>
+                <th>创建时间</th>
+                <th>当前状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="data" id="vo"}
+            <tr>
+                <td><img src="{$vo.img}"/></td>
+                <td>{$vo.desc}</td>
+                <td>{$vo.llrs}</td>
+                <td>{$vo.cjsj}</td>
+                <td>{if condition="$vo.status=='1'"}使用中{else/}已停用{/if}</td>
+                <td>
+                    <div class="">
+                        <a class="rha-bt-a" href="javascript:;" onclick="editReply('{$vo.id}')">修改</a>
+                        {if condition="$vo.status=='1'"}
+                        <a class="rha-bt-a" href="javascript:;" onclick="updateReply('{$vo.id}','0')">停用</a>
+                        {else/}
+                        <a class="rha-bt-a" href="javascript:;" onclick="updateReply('{$vo.id}','1')">开启</a>
+                        {/if}
+                        <a class="rha-bt-a" href="javascript:;" onclick="delReply('{$vo.id}')">删除</a>
+                    </div>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+        {$data->render()|raw}
+        {/case}
+        {/switch}
+    </div>
+</div>
+<script>
+    var layer;
+    var form;
+    layui.use(['layer','form'], function() {
+        layer = layui.layer;
+        form = layui.form;
+        form.on('select(types)', function(data){
+            $.post("",{search_type:data.value},function (res) {})
+        });
+    })
+    function delReply(id) {
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.confirm('你确定需要删除吗？', {
+                btn: ['是','不'] //按钮
+            }, function(){
+                $.post("{:url('mp/Mp/delTzgl')}",{'id':id},function (res) {
+                    if(res.status==1){
+                        layer.alert(res.msg,function (index) {
+                            window.location.reload();
+                            layer.close(index);
+                        })
+
+                    }else{
+                        layer.alert(res.msg)
+                    }
+                })
+            }, function(){
+
+            });
+        });
+
+    }
+    function updateReply(id,status) {
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            $.post("{:url('mp/Mp/updateTzgl')}",{'id':id,'status':status},function (res) {
+                if(res.status==1){
+                    layer.msg(res.msg,{icon:1,time:2000},function (index) {
+                        window.location.reload();
+
+                    })
+
+                }else{
+                    layer.alert(res.msg)
+                }
+            })
+        });
+    }
+    var layer;
+    layui.use('layer', function(){
+        var layer = layui.layer;
+    });
+    function addReply(id) {
+        layer.open({
+            type: 2,
+            title: '添加通知',
+            shadeClose: true,
+            shade: 0.5,
+            area: ['680px', '550px'],
+            content: '{:url("mp/mp/addTzgl")}',
+            cancel: function(index, layero){
+                window.location.reload();
+            }
+        });
+    }
+    function editReply(id) {
+        layer.open({
+            type: 2,
+            title: '修改通知',
+            shadeClose: true,
+            shade: 0.5,
+            area: ['680px', '550px'],
+            content: '{:url("mp/mp/editTzgl")}?id='+id,
+            cancel: function(index, layero){
+                window.location.reload();
+            }
+        });
+    }
+
+</script>
+{/block}

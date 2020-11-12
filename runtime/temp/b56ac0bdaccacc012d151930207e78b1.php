@@ -1,3 +1,4 @@
+<?php /*a:1:{s:95:"C:\Users\Abby\Downloads\ye-star-rhaphp-master\rhaphp\themes/mobile/admin/system\media-list.html";i:1604931973;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -8,9 +9,9 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<!--标准mui.css-->
-	{CSS href="__STATIC__/mui/css/mui.min.css" /}
+	<link rel="stylesheet" type="text/css" href="/public/static//mui/css/mui.min.css" />
 	<!--App自定义的css-->
-	{CSS href="__STATIC__/mui/css/app.css" /}
+	<link rel="stylesheet" type="text/css" href="/public/static//mui/css/app.css" />
 	<style>
 		.title {
 			margin: 20px 15px 10px;
@@ -59,7 +60,7 @@
 </div>
 
 </body>
-{js href='__STATIC__/mui/js/mui.min.js' /}
+<script type="text/javascript" src="/public/static//mui/js/mui.min.js"></script>
 <script>
 	mui.init({
 		swipeBack:true //启用右滑关闭功能

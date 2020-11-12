@@ -1,4 +1,4 @@
-<?php /*a:2:{s:89:"C:\Users\Abby\Downloads\ye-star-rhaphp-master\rhaphp\themes/pc/mp/index\miniapplists.html";i:1602553411;s:91:"C:\Users\Abby\Downloads\ye-star-rhaphp-master\rhaphp\themes/pc/mp/..\admin\common\base.html";i:1602553411;}*/ ?>
+<?php /*a:2:{s:84:"C:\Users\Abby\Downloads\ye-star-rhaphp-master\rhaphp\themes/pc/mp/friends\index.html";i:1602553411;s:91:"C:\Users\Abby\Downloads\ye-star-rhaphp-master\rhaphp\themes/pc/mp/..\admin\common\base.html";i:1602553411;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,93 +92,184 @@
     <div class="content" id="tradeSearchBd">
         <?php if(isset($menu_tile) OR $menu_title != ''): ?>
         <div class="content-hd">
-            <h2><?php echo htmlentities($menu_title); ?>
-<a href="<?php echo url('mp/Index/addminiapp'); ?>" class="layui-btn layui-btn-normal layui-btn-sm rha-nav-title">增加小程序</a>
-</h2>
+            <h2><?php echo htmlentities($menu_title); ?></h2>
         </div>
         <?php endif; ?>
         
-<div style="padding: 0px 10px 0px 10px;">
+<form action="" class="layui-form" method="get">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">呢称：</label>
+            <div class="layui-input-block">
+                <input type="text" name="nickname" value="<?php echo htmlentities($post['nickname']); ?>" placeholder="请输入呢称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">关注时间</label>
+            <div class="layui-input-inline">
+                <input name="times" id="rhaphp-time1" value="<?php echo $post['times']; ?>" class="layui-input" placeholder="开始时间 到 结束时间" lay-key="17" type="text">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">互动时间</label>
+            <div class="layui-input-block">
+                <input  name="need" <?php if($post['need'] == '1'): ?> checked <?php endif; ?> lay-skin="primary" value="1" title="有效"  type="checkbox">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">性别：</label>
+            <div class="layui-input-block">
+                <input name="sex" <?php if($post['sex'] == '1'): ?> checked <?php endif; ?> value="1" title="男" checked="" type="radio">
+                <input name="sex" <?php if($post['sex'] == '2'): ?> checked <?php endif; ?> value="2" title="女" type="radio">
+                <input name="sex" <?php if($post['sex'] == '-1'): ?> checked <?php endif; ?> value="-1" title="不限" type="radio">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn layui-btn-sm layui-btn-normal">
+                    <i class="layui-icon">&#xe615;</i>
+                    搜索</button>
+            </div>
+        </div>
+    </div>
+</form>
+<form class="layui-form" action="" style="padding: 0px 10px 0px 10px;">
     <table class="layui-table" lay-skin="line">
         <colgroup>
-            <col width="">
+            <col width="50">
             <col width="80">
-            <col width="120">
-            <col width="300">
+            <col>
         </colgroup>
         <thead>
+        <!--<tr>-->
+        <!--<th>&nbsp;全部</th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--</tr>-->
         <tr>
-            <th>小程序信息</th>
-            <th>状态</th>
-            <th>小程序应用</th>
-            <th>操作</th>
+            <th><input name="" lay-skin="primary" lay-filter="allChoose" type="checkbox"></th>
+            <th></th>
+            <th><a id="synselect" class="layui-btn layui-btn-sm" href="javascript:;">同步选中粉丝信息</a><a id="getAllFriend" class="layui-btn layui-btn-sm" href="javascript:;">同步全部粉丝</a></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
-        <?php if(is_array($miniappList) || $miniappList instanceof \think\Collection || $miniappList instanceof \think\Paginator): $i = 0; $__LIST__ = $miniappList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+        <?php if(is_array($friendList) || $friendList instanceof \think\Collection || $friendList instanceof \think\Paginator): $i = 0; $__LIST__ = $friendList;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
         <tr>
+            <td><input name="openid" value="<?php echo htmlentities($v['openid']); ?>" lay-skin="primary" type="checkbox"></td>
             <td>
-                <div class="mp-logo">
-                    <div class="logo-left">
-                        <img src="<?php echo htmlentities($vo['logo']); ?>">
-                    </div>
-                </div>
-                <div class="logo-right">
-                    <p class="p1"><?php echo htmlentities($vo['name']); ?></p>
-                    <p class="p2">类型：<?php if($vo['type']==1): ?>认证小程序<?php else: ?>普通小程序<?php endif; ?></p>
+                <div  style="padding: 1px; border: #e6e6e6 solid 1px; width:35px; float: left; ">
+                    <img class="form_logo" src="<?php echo htmlentities($v['headimgurl']); ?>" width="35" height="35">
                 </div>
             </td>
-            <td><?php if($vo['status']=='1'): ?> 正常<?php else: ?>停用<?php endif; ?></td>
-            <td><?php if($vo['addon_name'] == ''): ?>暂无应用<?php else: ?><?php echo htmlentities($vo['addon_name']); ?><?php endif; ?></td>
+            <td><?php echo htmlentities($v['nickname']); ?></td>
+            <td>关注：<?php echo htmlentities(date("Y-m-d",!is_numeric($v['subscribe_time'])? strtotime($v['subscribe_time']) : $v['subscribe_time'])); ?></td>
             <td>
-                <a class="rha-bt-a" href="<?php echo url('miniapp/miniapp/topnav',['_mid'=>$vo['id']]); ?>">进入小程序</a>
-                <a class="rha-bt-a" href="javascript:plusApp('<?php echo htmlentities($vo['id']); ?>');">+应用</a>
-                <a class="rha-bt-a" href="<?php echo url('mp/Index/upMiniapp',['id'=>$vo['id']]); ?>">修改</a>
-                <a class="rha-bt-a" href="<?php echo url('mp/Index/miniappSetingInfo',['id'=>$vo['id']]); ?>">配置信息</a>
-                <a class="rha-bt-a" href="javascript:;" onclick="delMiniapp('<?php echo htmlentities($vo['id']); ?>')">删除</a>
-            </td>
+            <td></td>
+            <td></td>
+            <td><a class="rha-bt-a" href="<?php echo url('Message/replyMsg',['openid'=>$v['openid']]); ?>">发送消息</a></td>
         </tr>
         <?php endforeach; endif; else: echo "" ;endif; ?>
         </tbody>
     </table>
-</div>
+</form>
+<?php echo $friendList->render(); ?>
 <script>
-    var layer
-    layui.use('layer', function () {
-        layer = layui.layer;
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#rhaphp-time1'
+            ,type: 'datetime'
+            ,range: '到'
+            ,format: 'yyyy-M-d'
+        });
+    })
+    layui.use('form', function(){
+        var $ = layui.jquery, form = layui.form;
+
+        //全选
+        form.on('checkbox(allChoose)', function(data){
+            var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
+            child.each(function(index, item){
+                item.checked = data.elem.checked;
+            });
+            form.render('checkbox');
+        });
     });
+    layui.use('layer', function(){
+        var $ = layui.jquery, layer = layui.layer;
+        var  lastOpenid='';
+        var page='1';
+        $(function () {
 
-    function delMiniapp(id) {
-        layer.confirm('请谨慎操作，你确定需要删除吗？', {
-            btn: ['是', '不'] //按钮
-        }, function () {
-            $.post("<?php echo url('mp/Index/delMiniapp'); ?>", {'id': id}, function (res) {
-                if (res.status == 1) {
-                    layer.alert(res.msg, function (index) {
+            $('#getAllFriend').click(function () {
+                //send(lastOpenid,page);
+                layer.open({
+                    type: 2,
+                    title: '同步全部粉丝',
+                    shadeClose: true,
+                    shade: 0.5,
+                    area: ['680px', '200px'],
+                    content: '<?php echo url("mp/Friends/SynFriends"); ?>',
+                    cancel: function(index, layero){
                         window.location.reload();
-                        layer.close(index);
-                    })
-                } else {
-                    layer.alert(res.msg)
-                }
-            })
-        });
-    }
+                    }
+                });
+            });
+            function send (lastOpenid,page){
+                $.post("<?php echo url('mp/Friends/SynFriends'); ?>",{'lastOpenid':lastOpenid,'page':page},function (result) {
+                    console.log(result);
+                    if(result.status==1){
+                        layer.msg('正在同步第'+result.page+'页', {
+                            icon: 16
+                            ,shade: 0.01,
+                            time:0,
+                        });
+                        send(result.lastOpenid,result.page)
+                    }
+                    if(result.status==2){
+                        //  layer.close(index);
+                        layer.alert('同步完成', {
+                            skin: 'layui-layer-lan'
+                            ,closeBtn: 0
+                        });
+                        location.reload()
 
-    function plusApp(mid) {
-        layer.open({
-            type: 2,
-            title: '+应用',
-            shadeClose: true,
-            shade: 0.3,
-            area: ['750px', '480px'],
-            content: '<?php echo url("plusApp","",""); ?>/mid/'+mid
-        });
-    }
-    function RplusApp() {
-        window.location.reload();
-    }
+                    }
+                    if(result.status==0){
+                        layer.alert(result.msg, {
+                            skin: 'layui-layer-lan'
+                            ,closeBtn: 0
+                        });
+                    }
+
+                })
+            }
+            $('#synselect').click(function () {
+                var openids=[];
+                $("input[name='openid']:checked").each(function (key,value) {
+                    openids[key]=$(this).val();
+                })
+                $.post("<?php echo url('mp/Friends/SynSelect'); ?>",{'openids':openids},function (result) {
+                    layer.alert(result.msg, {
+                        closeBtn: 0
+                    });
+                })
+            })
+        })
+    });
 </script>
+
 
     </div>
 </div>

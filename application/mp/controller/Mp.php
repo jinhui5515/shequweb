@@ -44,8 +44,90 @@ class Mp extends Base
         $this->assign('report', $result);
         return view();
     }
+    /**
+     * 通知类管理
+     * @author 314835050@qq.com
+     * @param string $type
+     * @return \think\response\View
+     */
+    public function tzgl($type = 'tzgg')
+    {
+        switch ($type) {
+            case 'tzgg':
+                $this->getTzglList('tzgg');
+                break;
+            case 'sqxw':
+                $this->getTzglList('sqxw');
+                break;
+            case 'bszn':
+                $this->getTzglList('bszn');
+                break;
+            case 'dwgk':
+                $this->getTzglList('dwgk');
+                break;
+            default:
+                $this->getTzglList('tzgg');
+                return view('tzgg');
+                break;
+        }
+        if (input('desc')) {
+            $result = Db::name('mp_tzgl')->alias('r')
+                ->where(['r.mpid' => $this->mid, 'r.type' => $type])
+                ->where('r.desc', 'like', '%' . input('desc') . '%')
+                ->order('r.cjsj DESC')
+                ->paginate(10, false, ['query' => ['desc' => input('desc')]]);
+            $this->assign('data', $result);
+            $this->assign('type', $type);
+        }
+        return view('tzgl');
+    }
+    public function getTzglList($type)
+    {
+        $rePly = Db::name('mp_tzgl')->alias('r')
+            ->where(['r.mpid' => $this->mid, 'r.type' => $type])
+            ->order('r.cjsj DESC')
+            ->paginate(10);
 
-
+        $this->assign('data', $rePly);
+        $this->assign('type', $type);
+    }
+    public function delTzgl($id = '')
+    {
+        Db::name('mp_tzgl')->where(['id' => $id])->delete();
+        ajaxMsg(1, '成功删除');
+    }
+    public function updateTzgl($id = '', $status = '')
+    {
+        Db::name('mp_tzgl')->where(['id' => $id])->update(['status' => $status]);
+        ajaxMsg(1, '改变状态成功');
+    }
+    public function addTzgl()
+    {
+        if (Request::isAjax()) {
+            $data = input('post.');
+            Db::name('mp_tzgl')->insert(['desc' => $data['desc'], 'type' => $data['type'], 'mpid' => $this->mid,'llrs' => 0,
+                'url' => $data['url'], 'img' => $data['img'], 'cjsj' => date("Y-m-d",time())]);
+            ajaxMsg(1, '添加成功');
+        } else {
+            return view('addTzgl');
+        }
+    }
+    public function editTzgl($id = '')
+    {
+        if (Request::isAjax()) {
+            $data = input('post.');
+            Db::name('mp_tzgl')->where('id', $data['id'])->update(['desc' => $data['desc'],
+                'url' => $data['url'], 'img' => $data['img'], 'cjsj' => date("Y-m-d",time())]);
+            ajaxMsg(1, '更改成功');
+        } else {
+            if (!$mp = Db::name('mp_tzgl')->where(['id' => $id])->find()) {
+                $this->error('没有此记录');
+            }
+            $this->assign('mp', $mp);
+            $this->assign('menu_title', '修改公众号');
+            return view('editTzgl');
+        }
+    }
     /**
      * 自动回复
      * @author 314835050@qq.com
